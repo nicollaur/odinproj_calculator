@@ -1,0 +1,79 @@
+body {
+    background-color: #1A090D;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: 'Bebas Neue', cursive;
+}
+
+.calc-body {
+    background-color: #6B6570;
+    height: 500px;
+    width: 375px;
+    border-radius: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    box-sizing: border-box;
+    box-shadow: rgba(172, 232, 148, 0.75) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.calc-screen {
+    border: 2px solid #4A314D;
+    background-color: #75826b;
+    border-radius: 1em;
+    height: 100px;
+    width: 340px;
+    margin-bottom: 20px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+#calc-text {
+    font-size: 40px;
+    text-align: right;
+    margin-right: 12px;
+    color: #ACE894;
+}
+
+#calc-text:hover {
+    color: #D72638;
+}
+
+.calc-screen p::after {
+    content: "";
+    width: 5px;
+    height: 29px;
+    background: #A8BA9A;
+    display: inline-block;
+    margin-left: 2px;
+    animation: cursor-blink 1.5s steps(2) infinite;
+}
+
+.button-container {
+    height: 360px;
+    width: 340px;
+}
+
+button {
+    flex-wrap: wrap;
+    height: 86px;
+    width: 82px;
+    background-color: #A8BA9A;
+    color: #6B6570;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+button:active {
+    color: #ACE894;
+}
+
+@keyframes cursor-blink {
+    0% {
+        opacity: 0;
+    }
+}
