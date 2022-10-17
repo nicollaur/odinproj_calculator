@@ -12,26 +12,24 @@ numBtns.forEach((numBtn) => {
     numBtn.addEventListener("click", function (e) {
         currentValue += e.target.innerHTML;
         calcScreenCurrent.textContent = currentValue;
+        currentValue = +(currentValue);
     })
 });
 
 operatorBtns.forEach((opBtn => {
     opBtn.addEventListener("click", function (e) {
         operator = e.target.innerHTML;
-        prevValue = currentValue;
+        prevValue = +(currentValue);
         currentValue = "";
-        calcScreenPrev.textContent = `$ prevValue}${operator}`;
+        calcScreenPrev.textContent = `${prevValue}${operator}`;
         calcScreenCurrent.textContent = "";
     })
 }));
 
 equalsBtn.addEventListener("click", function (e) {
-    currentValue = +(currentValue);
-    prevValue = +(prevValue);
-    console.log(currentValue, prevValue);
-    //     calcScreenPrev.textContent = "";
-    //     currentValue = operate(`${operator}, $ prevValue}, ${currentValue}`);
-    //     calcScreenCurrent.textContent = currentValue;
+    currentValue = operate(operator, prevValue, currentValue);
+    calcScreenCurrent.textContent = currentValue;
+    calcScreenPrev.textContent = "";
 })
 
 function operate(operator, num1, num2) {
