@@ -9,11 +9,17 @@ let currentValue = "";
 let prevValue = "";
 let operator = "";
 
+equalsBtn.disabled = true;
+
 numBtns.forEach((numBtn) => {
     numBtn.addEventListener("click", function (e) {
         currentValue += e.target.innerHTML;
         calcScreenCurrent.textContent = currentValue;
         currentValue = +(currentValue);
+
+        if (currentValue !== "" && prevValue !== "") {
+            equalsBtn.disabled = false;
+        }
     })
 });
 
