@@ -2,24 +2,37 @@ const calcScreenCurrent = document.querySelector(".current-operand");
 const calcScreenPrev = document.querySelector(".previous-operand");
 const numBtns = document.querySelectorAll(".number");
 const operatorBtns = document.querySelectorAll(".operator");
+const equalsBtn = document.querySelector(".equals");
 
-let displayValue = 0;
+let currentValue = "";
+let prevValue = "";
 let operator = "";
 
 numBtns.forEach((numBtn) => {
     numBtn.addEventListener("click", function (e) {
-        displayValue = e.target.innerHTML;
-        calcScreenCurrent.textContent = e.target.innerHTML;
+        currentValue += e.target.innerHTML;
+        calcScreenCurrent.textContent = currentValue;
     })
 });
 
 operatorBtns.forEach((opBtn => {
     opBtn.addEventListener("click", function (e) {
         operator = e.target.innerHTML;
-        calcScreenPrev.textContent = `${displayValue}${operator}`;
+        prevValue = currentValue;
+        currentValue = "";
+        calcScreenPrev.textContent = `$ prevValue}${operator}`;
         calcScreenCurrent.textContent = "";
     })
-}))
+}));
+
+equalsBtn.addEventListener("click", function (e) {
+    currentValue = +(currentValue);
+    prevValue = +(prevValue);
+    console.log(currentValue, prevValue);
+    //     calcScreenPrev.textContent = "";
+    //     currentValue = operate(`${operator}, $ prevValue}, ${currentValue}`);
+    //     calcScreenCurrent.textContent = currentValue;
+})
 
 function operate(operator, num1, num2) {
     if (operator === "+") {
