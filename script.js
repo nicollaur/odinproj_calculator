@@ -1,14 +1,21 @@
 const calcScreenCurrent = document.querySelector(".current-operand");
 const numBtns = document.querySelectorAll(".number");
+const operatorBtns = document.querySelectorAll(".operator");
 
 let displayValue = 0;
 
-numBtns.forEach((btn) => {
-    btn.addEventListener("click", function (e) {
+numBtns.forEach((numBtn) => {
+    numBtn.addEventListener("click", function (e) {
         displayValue = e.target.innerHTML;
         calcScreenCurrent.textContent = e.target.innerHTML;
     })
-})
+});
+
+operatorBtns.forEach((opBtn => {
+    opBtn.addEventListener("click", function (e) {
+        console.log(e.target.innerHTML);
+    })
+}))
 
 function operate(operator, num1, num2) {
     if (operator === "+") {
@@ -17,7 +24,7 @@ function operate(operator, num1, num2) {
         return subtract(num1, num2);
     } else if (operator === "*") {
         return multiply(num1, num2);
-    } else if (operator === "/") {
+    } else if (operator === "÷") {
         return divide(num1, num2);
     }
 };
