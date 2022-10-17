@@ -8,6 +8,9 @@ let currentValue = "";
 let prevValue = "";
 let operator = "";
 
+//12 + 7 - 5 * 3 = 42
+
+
 numBtns.forEach((numBtn) => {
     numBtn.addEventListener("click", function (e) {
         currentValue += e.target.innerHTML;
@@ -18,10 +21,14 @@ numBtns.forEach((numBtn) => {
 
 operatorBtns.forEach((opBtn => {
     opBtn.addEventListener("click", function (e) {
+        if (currentValue !== "" && prevValue !== "") {
+            currentValue = operate(operator, prevValue, currentValue);
+        }
+
         operator = e.target.innerHTML;
         prevValue = +(currentValue);
         currentValue = "";
-        calcScreenPrev.textContent = `${prevValue}${operator}`;
+        calcScreenPrev.textContent = `${prevValue} ${operator}`;
         calcScreenCurrent.textContent = "";
     })
 }));
