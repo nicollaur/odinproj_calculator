@@ -15,6 +15,7 @@ equalsBtn.disabled = true;
 
 numBtns.forEach((numBtn) => {
     numBtn.addEventListener("click", function (e) {
+        decimalBtn.disabled = false;
         currentValue += e.target.innerHTML;
         calcScreenCurrent.textContent = currentValue;
         currentValue = +(currentValue);
@@ -26,8 +27,12 @@ numBtns.forEach((numBtn) => {
 });
 
 decimalBtn.addEventListener("click", function (e) {
-    currentValue += e.target.innerHTML;
-    calcScreenCurrent.textContent = currentValue;
+    if (calcScreenCurrent.textContent.includes(".")) {
+        decimalBtn.disabled = true;
+    } else {
+        currentValue += e.target.innerHTML;
+        calcScreenCurrent.textContent = currentValue;
+    }
 });
 
 operatorBtns.forEach((opBtn => {
@@ -67,7 +72,7 @@ allClearBtn.addEventListener("click", function () {
 deleteBtn.addEventListener("click", function () {
     currentValue = currentValue.toString();
     currentValue = currentValue.replace(/\d$/, '');
-    currentValue = parseInt(currentValue);
+    currentValue = +(currentValue);
     calcScreenCurrent.textContent = currentValue;
 });
 
