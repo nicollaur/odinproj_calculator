@@ -4,10 +4,13 @@ const numBtns = document.querySelectorAll(".number");
 const operatorBtns = document.querySelectorAll(".operator");
 const equalsBtn = document.querySelector(".equals");
 const decimalBtn = document.querySelector(".decimal");
+const allClearBtn = document.querySelector(".all-clear");
 
 let currentValue = "";
 let prevValue = "";
 let operator = "";
+
+//12 + 7 - 5 * 3 = 42
 
 equalsBtn.disabled = true;
 
@@ -26,14 +29,13 @@ numBtns.forEach((numBtn) => {
 decimalBtn.addEventListener("click", function (e) {
     currentValue += e.target.innerHTML;
     calcScreenCurrent.textContent = currentValue;
-})
+});
 
 operatorBtns.forEach((opBtn => {
     opBtn.addEventListener("click", function (e) {
         //allows operator btn to perform equations independently of equals btn
         if (currentValue !== "" && prevValue !== "") {
             currentValue = roundDecimal(operate(operator, prevValue, currentValue));
-
         }
 
         operator = e.target.innerHTML;
@@ -45,9 +47,23 @@ operatorBtns.forEach((opBtn => {
 }));
 
 equalsBtn.addEventListener("click", function (e) {
+    // if (operator === "÷" && currentValue === NaN) {
+    //     calcScreenPrev.textContent = "";
+    //     calcScreenCurrent.textContent = "OoOoOoOoOoOoOooo!";
+    // }
+
     currentValue = roundDecimal(operate(operator, prevValue, currentValue));
     calcScreenCurrent.textContent = currentValue;
     calcScreenPrev.textContent = "";
+    prevValue = "";
+});
+
+allClearBtn.addEventListener("click", function (e) {
+    currentValue = "";
+    prevValue = "";
+    operator = "";
+    calcScreenPrev.textContent = "CALC OF"
+    calcScreenCurrent.textContent = "DOOM";
 })
 
 function operate(operator, num1, num2) {
