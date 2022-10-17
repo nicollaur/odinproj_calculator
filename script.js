@@ -5,6 +5,7 @@ const operatorBtns = document.querySelectorAll(".operator");
 const equalsBtn = document.querySelector(".equals");
 const decimalBtn = document.querySelector(".decimal");
 const allClearBtn = document.querySelector(".all-clear");
+const deleteBtn = document.querySelector(".delete");
 
 let currentValue = "";
 let prevValue = "";
@@ -55,13 +56,20 @@ equalsBtn.addEventListener("click", function (e) {
     }
 });
 
-allClearBtn.addEventListener("click", function (e) {
+allClearBtn.addEventListener("click", function () {
     currentValue = "";
     prevValue = "";
     operator = "";
     calcScreenPrev.textContent = "CALC OF"
     calcScreenCurrent.textContent = "DOOM";
-})
+});
+
+deleteBtn.addEventListener("click", function () {
+    currentValue = currentValue.toString();
+    currentValue = currentValue.replace(/\d$/, '');
+    currentValue = parseInt(currentValue);
+    calcScreenCurrent.textContent = currentValue;
+});
 
 function operate(operator, num1, num2) {
     if (operator === "+") {
