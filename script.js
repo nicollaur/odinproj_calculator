@@ -3,13 +3,11 @@ const calcScreenPrev = document.querySelector(".previous-operand");
 const numBtns = document.querySelectorAll(".number");
 const operatorBtns = document.querySelectorAll(".operator");
 const equalsBtn = document.querySelector(".equals");
+const decimalBtn = document.querySelector(".decimal");
 
 let currentValue = "";
 let prevValue = "";
 let operator = "";
-
-//12 + 7 - 5 * 3 = 42
-
 
 numBtns.forEach((numBtn) => {
     numBtn.addEventListener("click", function (e) {
@@ -19,8 +17,14 @@ numBtns.forEach((numBtn) => {
     })
 });
 
+decimalBtn.addEventListener("click", function (e) {
+    currentValue += e.target.innerHTML;
+    calcScreenCurrent.textContent = currentValue;
+})
+
 operatorBtns.forEach((opBtn => {
     opBtn.addEventListener("click", function (e) {
+        //allows operator btn to perform equations independently of equals btn
         if (currentValue !== "" && prevValue !== "") {
             currentValue = operate(operator, prevValue, currentValue);
         }
