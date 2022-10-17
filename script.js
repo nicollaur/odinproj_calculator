@@ -10,8 +10,6 @@ let currentValue = "";
 let prevValue = "";
 let operator = "";
 
-//12 + 7 - 5 * 3 = 42
-
 equalsBtn.disabled = true;
 
 numBtns.forEach((numBtn) => {
@@ -47,15 +45,14 @@ operatorBtns.forEach((opBtn => {
 }));
 
 equalsBtn.addEventListener("click", function (e) {
-    // if (operator === "÷" && currentValue === NaN) {
-    //     calcScreenPrev.textContent = "";
-    //     calcScreenCurrent.textContent = "OoOoOoOoOoOoOooo!";
-    // }
-
-    currentValue = roundDecimal(operate(operator, prevValue, currentValue));
-    calcScreenCurrent.textContent = currentValue;
-    calcScreenPrev.textContent = "";
-    prevValue = "";
+    if (currentValue === 0 && operator === "÷") {
+        calcScreenCurrent.textContent = "oOoOoO";
+    } else {
+        currentValue = roundDecimal(operate(operator, prevValue, currentValue));
+        calcScreenCurrent.textContent = currentValue;
+        calcScreenPrev.textContent = "";
+        prevValue = "";
+    }
 });
 
 allClearBtn.addEventListener("click", function (e) {
@@ -74,7 +71,7 @@ function operate(operator, num1, num2) {
     } else if (operator === "*") {
         return multiply(num1, num2);
     } else if (operator === "÷") {
-        return divide(num1, num2);
+        return divide(num1, num2)
     }
 };
 
