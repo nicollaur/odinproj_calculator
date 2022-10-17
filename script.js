@@ -26,7 +26,8 @@ operatorBtns.forEach((opBtn => {
     opBtn.addEventListener("click", function (e) {
         //allows operator btn to perform equations independently of equals btn
         if (currentValue !== "" && prevValue !== "") {
-            currentValue = operate(operator, prevValue, currentValue);
+            currentValue = roundDecimal(operate(operator, prevValue, currentValue));
+
         }
 
         operator = e.target.innerHTML;
@@ -38,7 +39,7 @@ operatorBtns.forEach((opBtn => {
 }));
 
 equalsBtn.addEventListener("click", function (e) {
-    currentValue = operate(operator, prevValue, currentValue);
+    currentValue = roundDecimal(operate(operator, prevValue, currentValue));
     calcScreenCurrent.textContent = currentValue;
     calcScreenPrev.textContent = "";
 })
@@ -77,4 +78,8 @@ function divide(...num) {
     return num.reduce((acc, cur) => {
         return acc / cur;
     })
+};
+
+function roundDecimal(value) {
+    return Number(Math.round(value + "e" + 2) + "e-" + 2);
 };
