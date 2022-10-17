@@ -1,8 +1,10 @@
 const calcScreenCurrent = document.querySelector(".current-operand");
+const calcScreenPrev = document.querySelector(".previous-operand");
 const numBtns = document.querySelectorAll(".number");
 const operatorBtns = document.querySelectorAll(".operator");
 
 let displayValue = 0;
+let operator = "";
 
 numBtns.forEach((numBtn) => {
     numBtn.addEventListener("click", function (e) {
@@ -13,7 +15,9 @@ numBtns.forEach((numBtn) => {
 
 operatorBtns.forEach((opBtn => {
     opBtn.addEventListener("click", function (e) {
-        console.log(e.target.innerHTML);
+        operator = e.target.innerHTML;
+        calcScreenPrev.textContent = `${displayValue}${operator}`;
+        calcScreenCurrent.textContent = "";
     })
 }))
 
