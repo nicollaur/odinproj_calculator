@@ -70,10 +70,19 @@ allClearBtn.addEventListener("click", function () {
 });
 
 deleteBtn.addEventListener("click", function () {
-    currentValue = currentValue.toString();
-    currentValue = currentValue.replace(/\d$/, '');
+
+    calcScreenCurrent.textContent = calcScreenCurrent.textContent
+        .toString()
+        .slice(0, -1);
+
+    currentValue = calcScreenCurrent.textContent;
     currentValue = +(currentValue);
-    calcScreenCurrent.textContent = currentValue;
+
+    //below was original code; created a bug that left currentValue as 0 if everything was deleted
+    // currentValue = currentValue.toString();
+    // currentValue = currentValue.replace(/\d$/, '');
+    // currentValue = +(currentValue);
+    // calcScreenCurrent.textContent = currentValue;
 });
 
 //keyboard support
