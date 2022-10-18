@@ -76,6 +76,72 @@ deleteBtn.addEventListener("click", function () {
     calcScreenCurrent.textContent = currentValue;
 });
 
+//keyboard support
+document.addEventListener("keyup", (event) => {
+    let name = event.key;
+    let code = event.code;
+
+    if (name >= 0 || name <= 9) {
+        decimalBtn.disabled = false;
+        currentValue += name;
+        calcScreenCurrent.textContent = currentValue;
+        currentValue = +(currentValue);
+
+        if (currentValue !== "" && prevValue !== "") {
+            equalsBtn.disabled = false;
+        }
+    } else if (
+        name === "+" ||
+        name === "-" ||
+        name === "*" ||
+        name === "÷"
+    ) {
+        if (currentValue !== "" && prevValue !== "") {
+            currentValue = roundDecimal(operate(operator, prevValue, currentValue));
+        }
+
+        operator = name;
+        prevValue = +(currentValue);
+        currentValue = "";
+        calcScreenPrev.textContent = `${prevValue} ${operator}`;
+        calcScreenCurrent.textContent = "";
+    } else if (name === "=") {
+        if (currentValue === 0 && operator === "÷") {
+            calcScreenCurrent.textContent = "oOoOoO";
+        } else {
+            currentValue = roundDecimal(operate(operator, prevValue, currentValue));
+            calcScreenCurrent.textContent = currentValue;
+            calcScreenPrev.textContent = "";
+            prevValue = "";
+        }
+    } else if (name === ".") {
+        if (calcScreenCurrent.textContent.includes(".")) {
+            decimalBtn.disabled = true;
+        } else {
+            currentValue += name;
+            calcScreenCurrent.textContent = currentValue;
+        }
+    } else if (name === "Backspace") {
+        currentValue = currentValue.toString();
+        currentValue = currentValue.replace(/\d$/, '');
+        currentValue = +(currentValue);
+        calcScreenCurrent.textContent = currentValue;
+    } else if (name === "a" || name === "c") {
+        currentValue = "";
+        prevValue = "";
+        operator = "";
+        calcScreenPrev.textContent = "CALC OF"
+        calcScreenCurrent.textContent = "DOOM";
+    }
+
+    console.log(`Key pressed ${name} \r\n Key code value: ${code}`);
+}, false);
+
+
+
+
+
+
 function operate(operator, num1, num2) {
     if (operator === "+") {
         return add(num1, num2);
